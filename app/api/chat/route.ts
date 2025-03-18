@@ -1,4 +1,5 @@
-import { OpenAIStream, StreamingTextResponse } from "ai";
+export const dynamic = "force-dynamic";
+
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
 
@@ -38,6 +39,9 @@ export async function POST(req: Request) {
   try {
     const { messages } = await req.json();
 
+    // contentが存在するメッセージのみをフィルタリング
+    const validMessages = messages.filter((msg: any) => msg.content);
+
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
@@ -45,18 +49,20 @@ export async function POST(req: Request) {
           role: "system",
           content: systemPrompt,
         },
-        ...messages.map((msg: any) => ({
+        ...validMessages.map((msg: any) => ({
           role: msg.role,
           content: msg.content,
         })),
       ],
-      temperature: 0.8,
-      max_tokens: 200,
-      stream: true,
     });
 
-    const stream = OpenAIStream(response);
-    return new StreamingTextResponse(stream);
+    const messageContent = response.choices[0]?.message?.content;
+    console.log("Message content:", messageContent);
+    if (!messageContent) {
+      throw new Error("Invalid response from OpenAI API");
+    }
+
+    return NextResponse.json({ message: messageContent });
   } catch (error) {
     console.error("Error:", error);
     return NextResponse.json(

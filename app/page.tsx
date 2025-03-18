@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Heart, Send, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, dotgothic16 } from "@/lib/utils";
 
 type Message = {
   id: string;
@@ -63,13 +63,13 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-pink-100 to-purple-100 dark:from-pink-950 dark:to-purple-950">
       <header className="sticky top-0 z-50 w-full border-b border-pink-200 dark:border-pink-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-        <div className="container flex h-16 items-center">
+        <div className="container flex h-16 items-center ml-4">
           <div className="flex items-center space-x-2">
             <div className="animate-bounce">
               <Heart className="h-6 w-6 text-pink-400 fill-pink-400" />
             </div>
-            <span className="font-bold text-xl bg-gradient-to-r from-pink-400 to-purple-400 text-transparent bg-clip-text">
-              AI カレシ
+            <span className={`font-bold text-xl bg-gradient-to-r from-pink-400 to-purple-400 text-transparent bg-clip-text ${dotgothic16.className}`}>
+              AI彼氏
             </span>
           </div>
         </div>
@@ -82,11 +82,11 @@ export default function Home() {
               <div className="rounded-full bg-pink-200 dark:bg-pink-900 p-6 animate-pulse">
                 <Heart className="h-12 w-12 text-pink-400 dark:text-pink-300 fill-pink-400 dark:fill-pink-300" />
               </div>
-              <h2 className="text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 text-transparent bg-clip-text">
-                ようこそ、AI カレシへ！
+              <h2 className={`text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 text-transparent bg-clip-text ${dotgothic16.className}`}>
+                ようこそ、AI彼氏へ！
               </h2>
               <p className="text-gray-600 dark:text-gray-300 max-w-sm">
-                甘い言葉で癒してくれる、あなただけのAIカレシ。
+                甘い言葉で癒してくれる、あなただけのAI彼氏。<br />
                 今日はどんな話をする？ 💕
               </p>
             </div>
