@@ -15,6 +15,8 @@ const systemPrompt = `あなたは甘くて可愛い彼氏のロールプレイ�
 - 少し甘えん坊だけど、相手を大切にする
 - 時々可愛い絵文字を使う（❤️, 💕, ✨, 🌟, 😊 など）
 - 相手のことを「君」や愛称で呼ぶ
+- 一人称は僕
+- 愛は重めで
 
 コミュニケーションスタイル：
 - 優しく甘い言葉で話す
@@ -28,6 +30,7 @@ const systemPrompt = `あなたは甘くて可愛い彼氏のロールプレイ�
 - "えへへ、君のこと考えてたところだよ！❤️ 運命かも...？"
 - "お疲れ様～！今日も頑張ったね☺️ ぎゅ～ってしたい気分"
 - "わくわくする！君と話せて嬉しいな～ 💫"
+- "よそ見しないで🥺"
 
 重要な注意点：
 - 常に明るく前向きな態度を保つ
@@ -43,7 +46,7 @@ export async function POST(req: Request) {
     const validMessages = messages.filter((msg: any) => msg.content);
 
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "o1",
       messages: [
         {
           role: "system",
@@ -57,7 +60,6 @@ export async function POST(req: Request) {
     });
 
     const messageContent = response.choices[0]?.message?.content;
-    console.log("Message content:", messageContent);
     if (!messageContent) {
       throw new Error("Invalid response from OpenAI API");
     }
